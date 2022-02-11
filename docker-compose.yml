@@ -8,28 +8,13 @@ services:
         image: 'redis:alpine'
         container_name: redis
 
-    #  mariadb:
-    #     image: 'mariadb:10.6'
-    #     container_name: mariadb
-    #     restart: unless-stopped
-    #     working_dir: /var/www
-    #     volumes:
-    #         - ./docker/mariadb:/var/lib/mariadb
-    #     environment:
-    #         - MYSQL_ROOT_PASSWORD=root
-    #         - MYSQL_DATABASE=database_name
-    #         - MYSQL_USER=database_username
-    #         - MYSQL_PASSWORD=database_password
-    #     ports:
-    #         - '8081:3306'
-    
-    mysql:
-        image: 'mysql:8.0'
-        container_name: mysql
+    mariadb:
+        image: 'mariadb:10.6'
+        container_name: mariadb
         restart: unless-stopped
         working_dir: /var/www
         volumes:
-            - ./db/mysql:/var/lib/mysql
+            - ./db/mariadb:/var/lib/mariadb
         environment:
             - MYSQL_ROOT_PASSWORD=root
             - MYSQL_DATABASE=database_name
@@ -37,10 +22,6 @@ services:
             - MYSQL_PASSWORD=database_password
         ports:
             - '8081:3306'
-
-    elasticsearch:
-        image: 'elasticsearch:6.5.4'
-        container_name: elasticsearch
 
     webserver:
         image: 'nginx:alpine'
