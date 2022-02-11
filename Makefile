@@ -7,6 +7,7 @@ all: $(VALIDPROJECT) $(ENV) init
 env-import: $(ENV)
 $(ENV):
 	@cp src/.env.example src/.env
+	@docker exec -it app php artisan key:generate
 project-framework:
 $(VALIDPROJECT):
 	composer create-project laravel/lumen src
