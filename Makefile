@@ -10,7 +10,7 @@ $(ENV):
 	@docker exec -it app php artisan key:generate
 project-framework:
 $(VALIDPROJECT):
-	composer create-project laravel/lumen src
+	composer create-project --prefer-dist laravel/lumen src
 init:
 	@docker-compose up -d
 list:

@@ -34,7 +34,8 @@ RUN apt-get update; \
         php8.0-xdebug \ 
         php8.0-xmlrpc \ 
         php8.0-xsl \ 
-        php8.0-yaml; \
+        php8.0-yaml \
+        raphf; \
     apt-get clean; \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
