@@ -1,6 +1,6 @@
 <?php
 
-/** @var \Laravel\Lumen\Routing\Router $router */
+use Laravel\Lumen\Routing\Router;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,13 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+/** @var Router $router */
+$router->group(['prefix' => '/api'], function() use ($router) {
+    $router->group(['prefix' => '/series'], function() use ($router) {
+        $router->get('/', 'SeriesController@index');
+        $router->get('/{id}', 'SeriesController@show');
+        $router->post('/create', 'SeriesController@create');
+        $router->put('/{id}', 'SeriesController@update');
+        $router->delete('/{id}', 'SeriesController@destroy');
+    });
 });
