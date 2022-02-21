@@ -7,8 +7,8 @@ WORKDIR "/var/www"
 
 ENV user=dean uid=1001
 
-RUN apt-get update; \
-    apt-get -y --no-install-recommends install \
+RUN apt-get update;
+RUN apt-get -y --force-yes install \
         git \
         curl \ 
         zip \
@@ -33,9 +33,11 @@ RUN apt-get update; \
         php8.0-uuid \ 
         php8.0-xdebug \ 
         php8.0-xmlrpc \ 
-        php8.0-xsl \ 
-        php8.0-yaml; \
-    apt-get clean; \
+        php8.0-yaml
+
+RUN apt-get -y --force-yes install php8.0-raphf
+
+RUN apt-get clean; \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 # Install nodejs
