@@ -28,7 +28,7 @@ class UsersController extends Controller
         $newUser = [
             "name" => $this->request->name,
             "email" => $this->request->email,
-            "password" => encrypt($this->request->password),
+            "password" =>  Hash::make($this->request->password),
         ];
 
 
