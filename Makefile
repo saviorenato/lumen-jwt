@@ -1,28 +1,22 @@
 # Recipes
 VALIDPROJECT ?= src/*
+VALIDVENDOR ?= src/vendor/*
 ENV ?= src/.env
 
-all: $(VALIDPROJECT) $(ENV) init
+all: $(VALIDPROJECT) $(ENV) init $(VALIDVENDOR)
 
-env-import: $(ENV)
 $(ENV):
 	@cp src/.env.example src/.env
-	@docker exec -it app php artisan key:generate
-project-framework:
 $(VALIDPROJECT):
 	composer create-project --prefer-dist laravel/lumen src
+$(VALIDVENDOR):
+	make install-dependencies
 init:
 	@docker-compose up -d
-list:
-	@docker exec -it app php artisan list
+	@make migrate
 migrate:
 	@docker exec -it app php artisan migrate
-login:
-	@docker exec -it app bash
-build:
-	@docker-compose up -d --build
-	@make install-dependencies
 install-dependencies:
 	@docker exec -it app composer install
 
-.PHONY: all project-framework env-import init
+.PHONY: all init 
