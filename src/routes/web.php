@@ -1,6 +1,7 @@
 <?php
 
 use Laravel\Lumen\Routing\Router;
+use App\Http\Middleware\JwtMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +16,15 @@ use Laravel\Lumen\Routing\Router;
 
 /** @var Router $router */
 $router->group(['prefix' => '/api'], function() use ($router) {
-    $router->group(['prefix' => '/series'], function() use ($router) {
-        $router->get('/', 'SeriesController@index');
-        $router->get('/{id}', 'SeriesController@show');
-        $router->post('/create', 'SeriesController@create');
-        $router->put('/{id}', 'SeriesController@update');
-        $router->delete('/{id}', 'SeriesController@destroy');
+
+    $router->post('auth', 'AuthController@authenticate');
+
+    $router->group(['prefix' => '/users', 'middleware' => JwtMiddleware::class], function() use ($router) {
+        $router->get('/', 'UsersController@index');
+        $router->get('/{id}', 'UsersController@show');
+        $router->post('/create', 'UsersController@create');
+        $router->put('/{id}', 'UsersController@update');
+        $router->delete('/{id}', 'UsersController@destroy');
     });
+
 });

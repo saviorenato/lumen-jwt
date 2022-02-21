@@ -15,6 +15,8 @@ init:
 	@docker-compose up -d
 list:
 	@docker exec -it app php artisan list
+migrate:
+	@docker exec -it app php artisan migrate
 login:
 	@docker exec -it app bash
 build:
