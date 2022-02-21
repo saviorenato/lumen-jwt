@@ -13,7 +13,6 @@ $(VALIDVENDOR):
 	make install-dependencies
 init:
 	@docker-compose up -d
-	@make migrate
 migrate:
 	@docker exec -it app php artisan migrate
 install-dependencies:
