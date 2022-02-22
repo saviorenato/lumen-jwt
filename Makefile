@@ -1,16 +1,13 @@
 # Recipes
 VALIDPROJECT ?= src/*
-VALIDVENDOR ?= src/vendor/*
 ENV ?= src/.env
 
-all: $(VALIDPROJECT) $(ENV) init $(VALIDVENDOR)
+all: $(VALIDPROJECT) $(ENV) init 
 
 $(ENV):
 	@cp src/.env.example src/.env
 $(VALIDPROJECT):
 	composer create-project --prefer-dist laravel/lumen src
-$(VALIDVENDOR):
-	make install-dependencies
 init:
 	@docker-compose up -d
 migrate:
